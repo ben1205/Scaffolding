@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+        var Arr1 = [
+                ["123", "false"],
+                ["231", "true"],
+                ["423", "false"],
+                ["144", "false"]
+            ];
+        var Arr2 = [
+                ["534", "true"],
+                ["234", "true"],
+                ["657","true"],
+                ["879", "false"],
+                ["000", "true"]
+        ];
+        var Arr3 = [
+                ["888", "true"],
+                ["58968", "false"],
+                ["25874", "false"],
+                ["02548741545545", "true"]
+        ]
+        function random_answer(Arr){
+            var len = Arr.length;
+            var  arr0 = [], n;
+            var old = 0;
+            n = Math.floor(Math.random()*len);
+            arr0[0] = n;
+            for(var i = 1; i < len-1; i++){//选项个数
+                n = Math.floor(Math.random()*len);
+                for(var j = 0; j < arr0.length; j++){
+                    if(arr0[j] != n){
+                        if(j==arr0.length-1)
+                        {
+                            arr0[i] = n;
+                            break;
+                        }
+                        else{
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        i--;
+                        break;
+                    }
+                }
+            }
+            for(var i = 0; i < len ;i++)
+            {
+                if(contains(arr0,i)){
+                    continue;
+                }
+                else{
+                    arr0[len-1] = i;
+                }
+            }
+            return arr0;
+        }
+        //数组中是否存在某个值
+        function contains(arr, obj) {
+            var i = arr.length;
+            while (i--) {
+                if (arr[i] === obj) {
+                return true;
+                }
+            }
+            return false;
+        }
+        console.log(random_answer(Arr1), random_answer(Arr2), random_answer(Arr3));
+    </script>
+</html>
