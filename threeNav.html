@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>属性导航</title>
+    <style>
+        ul,li,p,a,div{
+            margin:0;
+            padding : 0;
+            font-family:Microsoft Yahei;
+            color: #222;
+        }
+        ul,li{
+            list-style: none;
+        }
+        .dom0>li{
+            line-height:30px;
+            font-size:20px;
+            padding-left:10px;
+            cursor:pointer;
+            width: 300px;
+        }
+        .dom0>li:hover{
+            background: #ccc;
+        }
+        .dom1{
+            display: none;
+        }
+        .dom1>li{
+            font-size:16px;
+            line-height: 20px;
+            padding-left:15px;
+            color: #555;
+        }
+        .dom0>li>img ,.dom1>li>img{
+            vertical-align: middle;
+            width: 12px;
+            height:12px;
+        }
+    </style>
+</head>
+<body>
+    <div id="motherfucker">
+    </div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    var data = {
+"department":[
+    {"name":"匹配部","role":"","members":[
+        {"name":"Steven","role":"电商经理","members":[]},
+        {"name":"Kevin","role":"电商主管","members":[]},
+        {"name":"Derrick","role":"匹配主管","members":[
+            {"name":"Abby","role":"匹配顾问","members":[]},
+            {"name":"April","role":"匹配顾问","members":[]}
+            ]},
+        {"name":"Scott","role":"匹配组长","members":[
+            {"name":"Coffee","role":"匹配顾问","members":[]}
+            ]}
+        ]},
+    {"name":"销售部","role":"","members":[
+        {"name":"Steven","role":"销售经理","members":[]},
+        {"name":"Kevin","role":"销售主管","members":[]},
+        {"name":"Adam","role":"人才顾问","members":[]},
+        {"name":"Work","role":"人才顾问","members":[]}
+        ]},
+    {"name":"财务部","role":"","members":[
+        {"name":"Steven","role":"财务","members":[]},
+        {"name":"Eliane","role":"会计","members":[]}
+        ]},
+    {"name":"运营部","role":"","members":[
+        {"name":"Diana","role":"运营主管","members":[]},
+        {"name":"Penny","role":"运营专员","members":[]}
+        ]}
+    ]
+};
+    var data0 = data.department;
+    var $mother = $('#motherfucker');
+
+    //遍历函数
+    function tree(e){
+        var _len = e.length;
+        var Arr = [];
+        if(_len > 1){
+            for (var i of e){
+                Arr[Arr.length] = i;
+            }
+        }else{
+            Arr[Arr.length] = e[0].name + '-' + e[0].role;
+        };
+        return Arr
+    };
+
+    //拼接函数
+    var html = '';
+    function install (data,classname) {
+        var first = tree(data);
+        if(first.length > 1){
+            html += "<ul class='"+ classname + "'>";
+            for(var i in first){
+                html += "<li>" + first[i].name + (first[i].role ? ('-' + first[i].role) : " ");
+                if(first[i].members.length){
+                    html += "<img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RUM2RDU0MjE5REM3MTFFNzg3MThCRUU4RUZGQ0FGMUIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RUM2RDU0MjI5REM3MTFFNzg3MThCRUU4RUZGQ0FGMUIiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpFQzZENTQxRjlEQzcxMUU3ODcxOEJFRThFRkZDQUYxQiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpFQzZENTQyMDlEQzcxMUU3ODcxOEJFRThFRkZDQUYxQiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PpcKkyUAAABvUExURQBHnf3+/idjrPv8/anB3iplrTZusi1nrrDG4a3E35u32aW+3CFfqkF2trvO5bnM5KO93DBqr7PI4j90tbfL47bK4zhvs8DS5zpxsztytJ652qK82y9pr6a/3T1ztDJrsL3P5jNssbTJ4iRhq////97xQ6AAAAAldFJOU////////////////////////////////////////////////wA/z0JPAAAAbElEQVR42mzPSRaCUAxE0UfvFxVswb6r/a9RZh6SvOGdJIVcwxpLrz0Y7M5g8HgCg7saDC6eYDDdYI5Z2TBP2b3C1uf4lqsAVVy+HqXimnuc7reVR/vWf2baBjhNfQcofeoApcMYoLR5/AQYALReGx6LNowCAAAAAElFTkSuQmCC'></img>";
+                    install(first[i].members, 'dom1');
+                }
+                html += "</li>"
+            }
+            html += "</ul>";
+        }else{
+            //console.log(first);
+            html += "<ul class='"+ classname + "'>";
+            html += "<li>" + first[0] +"</li>"
+            html += "</ul>";
+        }
+       return html;
+    };
+
+    $mother.append(install(data0, 'dom0'));
+
+    //滑动事件
+    $('.dom0>li').click(function(e){
+        e.stopPropagation();
+        $(this).find('>ul').slideToggle(400);
+    });
+
+    $('.dom1>li').click(function(e){
+        e.stopPropagation();
+        $(this).find('>ul').slideToggle(400);
+    });
+</script>
+</html>
