@@ -9,3 +9,4 @@ Logic algorithm
 >> [三级导航demo](https://github.com/ben1205/Scaffolding/edit/master/threeNav.html)<br/>
 >> [数组去重方法](https://github.com/ben1205/Scaffolding/edit/master/array.js)<br/>
 >> [select箭头样式替换](https://github.com/ben1205/Scaffolding/edit/master/select.css)<br/>
+>> [简单字符串筛选去重](https://github.com/ben1205/Scaffolding/edit/master/duplicateRemoval.js)<br/>
